@@ -11,7 +11,7 @@ from __future__ import print_function
 from __future__ import division
 import struct  # there are 2 places that use this ... why?
 import time
-from pycreate2.packets import SensorPacketDecoder
+from pycreate2.packets import decode_sensor_packets
 from pycreate2.createSerial import SerialCommandInterface
 from pycreate2.OI import OPCODES
 # from pycreate2.OI import calc_query_data_len
@@ -43,23 +43,23 @@ class Create2(object):
 		- creates serial port
 		- creates decoder
 		"""
-		self.SCI = SerialCommandInterface()
-		self.SCI.open(port, baud)
+		self.SCI = SerialCommandInterface(port, baud)
 		# self.decoder = SensorPacketDecoder()
 		self.decoder = None
 		self.sleep_timer = 0.5
 
 	def __del__(self):
 		"""Destructor, cleans up when class goes out of scope"""
+		self.cleanup()
+
+	def cleanup(self):
 		# stop motors
 		self.drive_stop()
 		time.sleep(self.sleep_timer)
-
 		# turn off LEDs
 		self.led()
 		self.digit_led_ascii('    ')
 		time.sleep(0.1)
-
 		# close it down
 		# self.power()
 		# self.safe()  # this beeps every now and then, but doesn't seem to go off
@@ -69,11 +69,20 @@ class Create2(object):
 		self.close()  # close serial port
 		time.sleep(0.1)
 
+	def open(self):
+		self.SCI.open()
+
 	def close(self):
 		"""
 		Closes up serial ports and terminates connection to the Create2
 		"""
 		self.SCI.close()
+
+	def __enter__(self):
+		self.open()
+
+	def __exit__(self, exc_type, exc_val, exc_tb):
+		self.close()
 
 	# ------------------- Mode Control ------------------------
 
@@ -86,7 +95,7 @@ class Create2(object):
 		self.SCI.write(OPCODES.START)
 		time.sleep(self.sleep_timer)
 
-	def getMode(self):
+	def get_mode(self):
 		"""
 		This doesn't seem to work
 		"""
@@ -320,7 +329,7 @@ class Create2(object):
 
 	# ------------------------ Songs ----------------------------
 
-	def createSong(self, song_num, notes):
+	def create_song(self, song_num, notes):
 		"""
 		Creates a song
 
@@ -352,7 +361,7 @@ class Create2(object):
 
 		return dt
 
-	def playSong(self, song_num):
+	def play_song(self, song_num):
 		"""
 		Play a song
 			Arguments
@@ -382,6 +391,6 @@ class Create2(object):
 		self.SCI.write(opcode, cmd)
 		time.sleep(0.015)  # wait 15 msec
 		packet_byte_data = self.SCI.read(sensor_pkt_len)
-		sensors = SensorPacketDecoder(packet_byte_data)
+		sensors = decode_sensor_packets(packet_byte_data)
 
 		return sensors

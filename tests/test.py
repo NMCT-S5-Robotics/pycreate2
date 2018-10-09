@@ -1,7 +1,7 @@
 # import pycreate2
 from pycreate2.OI import RESPONSE_SIZES
 from pycreate2.OI import calc_query_data_len
-from pycreate2.packets import SensorPacketDecoder
+from pycreate2.packets import decode_sensor_packets
 # from collections import namedtuple
 import os
 
@@ -28,7 +28,7 @@ def test_process_packet():
 	try:
 		# i need to get a known packet and check values
 		data = bytearray(os.urandom(80))
-		sensors = SensorPacketDecoder(data)
+		sensors = decode_sensor_packets(data)
 		assert isinstance(sensors, tuple)
 	except:
 		assert False
