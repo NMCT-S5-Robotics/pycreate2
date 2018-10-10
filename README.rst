@@ -1,19 +1,9 @@
-.. image:: https://raw.githubusercontent.com/walchko/pycreate2/master/pics/create.png
+.. image:: ./pics/create.png
 	:align: center
 
 pyCreate2
 ================
 
-.. image:: https://img.shields.io/pypi/l/pycreate2.svg
-    :target: https://pypi.python.org/pypi/pycreate2
-.. image:: https://img.shields.io/pypi/pyversions/pycreate2.svg
-    :target:  https://pypi.python.org/pypi/pycreate2
-.. image:: https://travis-ci.org/MomsFriendlyRobotCompany/pycreate2.svg?branch=master
-    :target: https://travis-ci.org/MomsFriendlyRobotCompany/pycreate2
-.. image:: https://img.shields.io/pypi/v/pycreate2.svg
-    :target: https://pypi.python.org/pypi/pycreate2
-.. image:: https://img.shields.io/pypi/format/pycreate2.svg
-    :target:  https://pypi.python.org/pypi/pycreate2
 
 A python library for controlling the `iRobot Create 2 <http://www.irobot.com/About-iRobot/STEM/Create-2.aspx>`_.
 
@@ -111,12 +101,12 @@ There are multiple ways to command the Create to move, here are some examples:
 	# Close the connection
 	# bot.close()
 
-More examples are found in the `examples folder <https://github.com/walchko/pycreate2/tree/master/examples>`_.
+More examples are found in the `examples folder <./examples>`_.
 
 Documents
 ------------
 
-Additional notes and documents are in the `docs folder <https://github.com/walchko/pycreate2/tree/master/docs/Markdown>`_.
+Additional notes and documents are in the `docs folder <./docs/Markdown>`_.
 
 Modes
 ~~~~~~~~~

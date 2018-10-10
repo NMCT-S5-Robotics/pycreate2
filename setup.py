@@ -7,15 +7,15 @@
 from __future__ import print_function
 from setuptools import setup
 from pycreate2.version import __version__ as VERSION
-from build_utils import BuildCommand
-from build_utils import PublishCommand
-from build_utils import BinaryDistribution
+# from build_utils import BuildCommand
+# from build_utils import PublishCommand
+# from build_utils import BinaryDistribution
 
 
 PACKAGE_NAME = 'pycreate2'
-BuildCommand.pkg = PACKAGE_NAME
-PublishCommand.pkg = PACKAGE_NAME
-PublishCommand.version = VERSION
+# BuildCommand.pkg = PACKAGE_NAME
+# PublishCommand.pkg = PACKAGE_NAME
+# PublishCommand.version = VERSION
 
 
 setup(
@@ -41,10 +41,10 @@ setup(
 	keywords=['irobot', 'create 2', 'api', 'framework', 'library', 'robotics', 'robot', 'smart'],
 	packages=[PACKAGE_NAME],
 	install_requires=open('requirements.txt').readlines(),
-	cmdclass={
-		'publish': PublishCommand,
-		'make': BuildCommand
-	},
+	# cmdclass={
+	# 	'publish': PublishCommand,
+	# 	'make': BuildCommand
+	# },
 	scripts=[
 		'bin/create_reset.py',
 		'bin/create_shutdown.py',

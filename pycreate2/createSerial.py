@@ -24,21 +24,23 @@ class SerialCommandInterface(object):
         Creates the serial port, but doesn't open it yet. Call open(port) to open
         it.
         """
-        self.ser = serial.serial_for_url(port, baud=baud, timeout=timeout, do_not_open=True)
-
-    def __del__(self):
-        """
-        Destructor.
-
-        Closes the serial port
-        """
-        self.close()
+        self.ser = serial.serial_for_url(port, baud, timeout=timeout, do_not_open=True)
 
     def __enter__(self):
         self.open()
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.close()
+
+    def __del__(self):
+        """
+        Destructor.
+
+        Checks if serial port was closed correctly
+        """
+        if self.is_open:
+            self.close()
+            raise RuntimeWarning("{} went out of scope without being closed")
 
     @property
     def is_open(self):
@@ -64,6 +66,14 @@ class SerialCommandInterface(object):
             print('-' * 40)
         else:
             raise Exception('Failed to open serial port {}'.format(self.ser.name))
+
+    def close(self):
+        """
+        Closes the serial connection.
+        """
+        if self.ser and self.ser.is_open:
+            print('Closing port {} @ {}'.format(self.ser.name, self.ser.port))
+            self.ser.close()
 
     def write(self, opcode, data=None):
         """
@@ -97,11 +107,3 @@ class SerialCommandInterface(object):
 
         data = self.ser.read(num_bytes)
         return data
-
-    def close(self):
-        """
-        Closes the serial connection.
-        """
-        if self.ser and self.ser.is_open:
-            print('Closing port {} @ {}'.format(self.ser.name, self.ser.port))
-            self.ser.close()
