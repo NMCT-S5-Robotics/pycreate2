@@ -6,7 +6,7 @@
 
 from __future__ import print_function
 from setuptools import setup
-from pycreate2.version import __version__ as VERSION
+# from pycreate2.version import __version__ as VERSION
 # from build_utils import BuildCommand
 # from build_utils import PublishCommand
 # from build_utils import BinaryDistribution
@@ -22,7 +22,7 @@ setup(
 	author='Kevin Walchko',
 	author_email='walchko@users.noreply.github.com',
 	name=PACKAGE_NAME,
-	version=VERSION,
+	version='0.7.4',
 	description='A library to control iRobot Create 2 with python',
 	long_description=open('README.rst').read(),
 	url='http://github.com/walchko/{}'.format(PACKAGE_NAME),
