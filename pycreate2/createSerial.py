@@ -24,7 +24,7 @@ class SerialCommandInterface(object):
         Creates the serial port, but doesn't open it yet. Call open(port) to open
         it.
         """
-        self.ser = serial.serial_for_url(port, baud, timeout=timeout, do_not_open=True)
+        self.ser = serial.serial_for_url(port, baud, timeout=timeout, dtdsrdtr=True, do_not_open=True)
 
     def __enter__(self):
         self.open()
