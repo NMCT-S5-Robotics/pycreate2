@@ -108,7 +108,7 @@ class Create2(object):
         """
         This doesn't seem to work
         """
-        self.SCI.write(OPCODES.OI_MODE)     # should request sensor packet #35 instead, see OI spec p. 29
+        self.SCI.write(OPCODES.OI_MODE)  # should request sensor packet #35 instead, see OI spec p. 29
         time.sleep(0.005)
         ans = self.SCI.read(1)
         if len(ans) == 1:

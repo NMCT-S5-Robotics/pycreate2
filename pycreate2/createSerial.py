@@ -24,7 +24,7 @@ class SerialCommandInterface(object):
         Creates the serial port, but doesn't open it yet. Call open(port) to open
         it.
         """
-        self.ser = serial.serial_for_url(port, baud, timeout=timeout, dtdsrdtr=True, do_not_open=True)
+        self.ser = serial.serial_for_url(port, baud, timeout=timeout,rtscts=True, dsrdtr=True, do_not_open=True)
 
     def __enter__(self):
         self.open()
@@ -72,7 +72,7 @@ class SerialCommandInterface(object):
         Closes the serial connection.
         """
         if self.ser and self.ser.is_open:
-            print('Closing port {} @ {}'.format(self.ser.name, self.ser.port))
+            print('Closing serial @ {}'.format(self.ser.port))
             self.ser.close()
 
     def write(self, opcode, data=None):
