@@ -9,7 +9,7 @@ import time
 
 from pycreate2 import Create2
 
-PORT = 'COM4'
+PORT = 'rfc2217://172.23.49.0:9000'
 BAUD = 115200
 
 bot = Create2(port=PORT, baud=BAUD)

@@ -22,7 +22,7 @@ setup(
 	author='Kevin Walchko',
 	author_email='walchko@users.noreply.github.com',
 	name=PACKAGE_NAME,
-	version='0.7.4',
+	version='0.7.5',
 	description='A library to control iRobot Create 2 with python',
 	long_description=open('README.rst').read(),
 	url='http://github.com/walchko/{}'.format(PACKAGE_NAME),
